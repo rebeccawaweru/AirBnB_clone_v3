@@ -6,6 +6,7 @@ from api.v1.views import app_views
 from os import environ
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 app.register_blueprint(app_views)
 
 
