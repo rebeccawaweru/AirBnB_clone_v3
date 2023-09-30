@@ -4,7 +4,7 @@ using to_dict() to retrieve an object into a valid JSON
 """
 from flask import jsonify, abort, request
 from api.v1.views import app_views, storage
-from models.state import state
+from models.state import State
 
 
 @app_views.route("/states", methods=["GET"], strict_slashes=False)
