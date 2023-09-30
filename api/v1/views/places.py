@@ -2,11 +2,10 @@
 """
 updating the place objects that handles all default API actions
 """
-from flask import jsonify, request, abort, make_response
+from flask import jsonify, request, abort
 from api.v1.views import app_views
 from models import storage
 from models.place import Place
-from models.city import City
 
 
 @app_views.route(
@@ -38,7 +37,7 @@ def delete_place(place_id):
         abort(404)
     storage.delete(place)
     storage.save()
-    return make_response(jsonify({}), 200)
+    return jsonify({})
 
 
 @app_views.route(
@@ -53,7 +52,7 @@ def create_place(city_id):
         abort(400, description="Not a JSON")
     if 'user_id' not in data:
         abort(400, description="Missing user_id")
-    if 'name' not in data:ii
+    if 'name' not in data:
         abort(400, description="Missing name")
     user = storage.get(User, data['user_id'])
     if not user:
@@ -61,7 +60,7 @@ def create_place(city_id):
     place = Place(**data)
     place.city_id = city.id
     place.save()
-    return make_response(jsonify(instance.to_dict()), 201)
+    return jsonify(place.to_dict()), 201
 
 
 @app_views.route("/places/<place_id>", methods=['PUT'], strict_slashes=False)
@@ -77,4 +76,4 @@ def update_place(place_id):
         if key not in ['id', 'user_id', 'city_id', 'created_at', 'updated_at']:
             setattr(place, key, value)
     place.save()
-    return make_response(jsonify(place.to_dict()), 200)
+    return jsonify(place.to_dict()), 200
