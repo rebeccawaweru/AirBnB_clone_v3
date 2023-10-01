@@ -4,6 +4,12 @@ updating the place objects that handles all default API actions
 """
 from flask import jsonify, request, abort
 from api.v1.views import app_views
+from models.amenity import Amenity
+from models.base_model import BaseModel, Base
+from models.city import City
+from models.review import Review
+from models.state import State
+from models.user import User
 from models import storage
 from models.place import Place
 
