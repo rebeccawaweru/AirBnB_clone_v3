@@ -5,8 +5,14 @@ places_amenities
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request, make_response
 from models import storage
+from models.base_model import BaseModel, Base
 from models.place import Place
 from models.amenity import Amenity
+from models.city import City
+from models.review import Review
+from models.state import State
+from models.user import User
+import json
 
 
 @app_views.route(
